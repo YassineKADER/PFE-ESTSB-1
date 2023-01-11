@@ -1,0 +1,7 @@
+{
+  "height": 200,
+  "width": 88,
+  "blockSize": 17,
+  "C": 19,
+  "ksize_Blur": 5
+}

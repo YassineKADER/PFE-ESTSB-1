@@ -4,6 +4,8 @@ import numpy as np
 import time
 import json
 
+#TODO make the falsk project for the app
+
 cap = cv2.VideoCapture('video.webm')
 width, height = 107, 250
 with open('CarParkPos2', 'rb') as f:

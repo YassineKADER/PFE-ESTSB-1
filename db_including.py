@@ -1,9 +1,9 @@
 import pyrebase
 
 config = {
-    "apiKey": "AIzaSyBgGx67w032_zncuZ37tFYPrm02rH1XbrY",
+    "apiKey": "",
     "authDomain": "wise-baton-353710.firebaseapp.com",
-    "databaseURL": "https://wise-baton-353710-default-rtdb.firebaseio.com",
+    "databaseURL": "",
     "projectId": "wise-baton-353710",
     "storageBucket": "wise-baton-353710.appspot.com",
     "messagingSenderId": "962857669223",
@@ -14,6 +14,34 @@ config = {
 
 firebase = pyrebase.initialize_app(config)
 
-data = firebase.auth().get_account_info()
+db = firebase.database()
+auth = firebase.auth()
 
-print(data)
+data2 = {
+    "Name": "morade kad",
+    "Phone": "+212613248324",
+    "Message": "Say hi !"
+}
+
+data4 = db.child("Users").get()
+
+print(data4.val())
+
+email = "yassine.kader2017fc@gmail.com"
+password = "password2023"
+#user = auth.create_user_with_email_and_password(email, password) #to create a new user
+
+user = auth.sign_in_with_email_and_password(email, password)
+data = auth.current_user #get the user data
+print(user)
+
+data = {
+    "name":"e",
+    "lastname" : "kar",
+    "age" : 19,
+    "alive" : True
+}
+
+db.child("Users").child(user["localId"]).set(data, token=user['idToken'])
+
+print(db.api_key)

@@ -49,44 +49,46 @@ def checkSpaces():
                     color, 2)
     return [spaces, len(posList)]
 
+try:
+    while True:
 
-while True:
+        # Get image frame
+        success, img = cap.read()
+        if cap.get(cv2.CAP_PROP_POS_FRAMES) == cap.get(cv2.CAP_PROP_FRAME_COUNT):
+            cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
+        # img = cv2.imread('img.png')
+        imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        imgBlur = cv2.GaussianBlur(imgGray, (3, 3), 1)
+        # ret, imgThres = cv2.threshold(imgBlur, 150, 255, cv2.THRESH_BINARY)
 
-    # Get image frame
-    success, img = cap.read()
-    if cap.get(cv2.CAP_PROP_POS_FRAMES) == cap.get(cv2.CAP_PROP_FRAME_COUNT):
-        cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
-    # img = cv2.imread('img.png')
-    imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    imgBlur = cv2.GaussianBlur(imgGray, (3, 3), 1)
-    # ret, imgThres = cv2.threshold(imgBlur, 150, 255, cv2.THRESH_BINARY)
-
-    blockSize = cv2.getTrackbarPos("blockSize", "Parameters")
-    C = cv2.getTrackbarPos("C", "Parameters")
-    ksize_Blur = cv2.getTrackbarPos("ksize_Blur", "Parameters")
-    if blockSize != data["blockSize"] or C != data["C"] or ksize_Blur !=data["ksize_Blur"]:
-        data["blockSize"] = blockSize
-        data["C"] = C
-        data["ksize_Blur"] = ksize_Blur
-        with open("config.json", 'w') as config:
-            json.dump(data, config)
-            config.close()
-    if blockSize % 2 == 0: blockSize += 1
-    if ksize_Blur % 2 == 0: ksize_Blur += 1
-    imgThres = cv2.adaptiveThreshold(imgBlur, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
+        blockSize = cv2.getTrackbarPos("blockSize", "Parameters")
+        C = cv2.getTrackbarPos("C", "Parameters")
+        ksize_Blur = cv2.getTrackbarPos("ksize_Blur", "Parameters")
+        if blockSize != data["blockSize"] or C != data["C"] or ksize_Blur !=data["ksize_Blur"]:
+            data["blockSize"] = blockSize
+            data["C"] = C
+            data["ksize_Blur"] = ksize_Blur
+            with open("config.json", 'w') as config:
+                json.dump(data, config)
+                config.close()
+        if blockSize % 2 == 0: blockSize += 1
+        if ksize_Blur % 2 == 0: ksize_Blur += 1
+        imgThres = cv2.adaptiveThreshold(imgBlur, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
                                      cv2.THRESH_BINARY_INV, blockSize, C)
-    imgThres = cv2.medianBlur(imgThres, ksize_Blur)
-    kernel = np.ones((3, 3), np.uint8)
-    imgThres = cv2.dilate(imgThres, kernel, iterations=1)
+        imgThres = cv2.medianBlur(imgThres, ksize_Blur)
+        kernel = np.ones((3, 3), np.uint8)
+        imgThres = cv2.dilate(imgThres, kernel, iterations=1)
 
-    print(checkSpaces())
-    # Display Output
+        print(checkSpaces())
+        # Display Output
 
-    cv2.imshow("Image", img)
-    cv2.imshow("ImageGray", imgThres)
-    cv2.imshow("ImageBlur", imgBlur)
-    key = cv2.waitKey(1)
-    time.sleep(0.5)
-    print(blockSize, C, ksize_Blur)
-    if key == ord('r'):
-        pass
+        cv2.imshow("Image", img)
+        cv2.imshow("ImageGray", imgThres)
+        cv2.imshow("ImageBlur", imgBlur)
+        key = cv2.waitKey(1)
+        time.sleep(0.5)#just for testing
+        print(blockSize, C, ksize_Blur)
+        if key == ord('r'):
+            pass
+except:
+    print("The programme is finished")

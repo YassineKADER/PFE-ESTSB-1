@@ -35,6 +35,8 @@ user = auth.sign_in_with_email_and_password(email, password)
 data = auth.current_user #get the user data
 print(user)
 
+send_reset_mail = auth.send_password_reset_email("yassine.kader2017fc@gmail.com")
+
 data = {
     "name":"e",
     "lastname" : "kar",

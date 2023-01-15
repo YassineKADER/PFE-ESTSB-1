@@ -15,7 +15,7 @@ config = {
 
 firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
-
+email,password ="",""
 app.secret_key = 'secret_word'
 
 
@@ -31,9 +31,17 @@ def logout():
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == "POST":
-        print(request.get_json())
-        return {"you are":"POST"}
-    return {"you are":"GET"}
+        login_data = request.get_json()
+        email = login_data.get("email")
+        password = login_data.get("password")
+        try:
+            print(email, password)
+            user = auth.sign_in_with_email_and_password(email, password)
+            print(user)
+            return {"login":1}
+        except:
+            print("out")
+            return {"login":0}
 
 @app.route('/forgotpassword')
 def forgot():

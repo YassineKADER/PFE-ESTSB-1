@@ -28,6 +28,13 @@ def index():
 def logout():
     pass
 
+@app.route('/login')
+def login():
+    return {"userId": ["hello", "hi", "try"],}
+
+@app.route('/forgotpassword')
+def forgot():
+    pass
 
 if __name__ == "__main__":
     app.run(debug=True, port=1212)

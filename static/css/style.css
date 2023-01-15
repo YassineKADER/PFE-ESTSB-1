@@ -15,9 +15,8 @@ body{
 .login{
     width: 360px;
     color: white;
-    height: 360px;
+    height: 55%;
     padding: 20px;
-    padding-bottom: 20px;
     border-radius: 12px;
     background-color: #161b22;
 }
@@ -34,4 +33,23 @@ body{
 .login input[type="submit"] {
     font-size: 20px;
     margin-top: 15px;
+}
+
+.login form a{
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.login form input[type="email"] {
+    background-color: #0d1117;
+    border: gray solid 0.5px;
+}
+
+.login form input[type="password"] {
+    background-color: #0d1117;
+    border: gray solid 0.5px;
+}
+
+.login img{
+    height:18px;
 }

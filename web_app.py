@@ -19,18 +19,21 @@ auth = firebase.auth()
 app.secret_key = 'secret_word'
 
 
-@app.route('/', methods=['POST', 'GET'])
+@app.route('/')
 def index():
     return render_template("Login.html")
 
 
-@app.route('/logout')
+@app.route('/logout', methods=['POST'])
 def logout():
     pass
 
-@app.route('/login')
+@app.route('/login', methods=['POST', 'GET'])
 def login():
-    return {"userId": ["hello", "hi", "try"],}
+    if request.method == "POST":
+        print(request.get_json())
+        return {"you are":"POST"}
+    return {"you are":"GET"}
 
 @app.route('/forgotpassword')
 def forgot():

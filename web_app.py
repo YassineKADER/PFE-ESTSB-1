@@ -43,9 +43,17 @@ def login():
             print("out")
             return {"login":0}
 
-@app.route('/forgotpassword')
+@app.route('/forgotpassword', methods=["POST", "GET"])
 def forgot():
-    pass
+    if request.method == "POST":
+        info = request.get_json()
+        email = info.get("email")
+        try:
+            auth.send_password_reset_email(email)
+            return {"sent":True}
+        except:
+            return {"sent":False}
+    return render_template("ForgotPass.html")
 
 if __name__ == "__main__":
     app.run(debug=True, port=1212)

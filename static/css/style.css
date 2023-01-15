@@ -55,3 +55,25 @@ body{
 .login img{
     height:18px;
 }
+
+.passForg{
+    width: 70vh;
+    color: white;
+    height: 35%;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: #161b22;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.passForg form{
+    font-size: 20px;
+}
+
+.passForg form input[type="email"] {
+    background-color: #0d1117;
+    border: gray solid 0.5px;
+    margin-bottom: 10px;
+}

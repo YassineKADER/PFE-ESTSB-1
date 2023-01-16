@@ -34,18 +34,14 @@ def logout():
 def login():
     if request.method == "POST":
         login_data = request.get_json()
-        print(login_data)
         email = login_data.get("email")
         password = login_data.get("password")
         try:
-            print(email, password)
             user = auth.sign_in_with_email_and_password(email, password)
             session.pop('user', None)
             session['user'] = user
-            print("cool")
             return {"login": True}
         except:
-            print("out")
             return {"login": False}
     return render_template("Login.html")
 

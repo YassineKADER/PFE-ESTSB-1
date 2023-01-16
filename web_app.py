@@ -55,9 +55,9 @@ def forgot():
             return {"sent":False}
     return render_template("ForgotPass.html")
 
-@app.route('dashboard', methods=["POST", "GET"])
+@app.route('/dashboard', methods=["POST", "GET"])
 def dashboard():
-    pass
+    return render_template("Dashboard.html")
 
 if __name__ == "__main__":
     app.run(debug=True, port=1212)

@@ -8,10 +8,13 @@
 
 body{
     height: 100vh;
+    background-color: #0d1117;
+}
+
+.flexed-body{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #0d1117;
 }
 
 .login{
@@ -78,4 +81,8 @@ body{
     background-color: #0d1117;
     border: gray solid 0.5px;
     margin-bottom: 10px;
+}
+
+#nav{
+    background-color:#161b22;
 }

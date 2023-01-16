@@ -8,15 +8,16 @@ form.addEventListener('submit', (event) =>{
     data = {"email":email, "password":password}
     console.log(JSON.stringify(data))
     fetch("/login",{method:'POST',headers: {'Content-Type': 'application/json'}, body : JSON.stringify(data)}).then(response => response.json()).then(data => {
-        if(data.login == 0){
+        if(data.login == false){
             const notallowed = document.createElement('div')
             notallowed.innerHTML = "Username or password not found"
             notallowed.style.color = 'red'
             notallowed.style.marginTop = "10px"
+            form.remove(notallowed)
             form.appendChild(notallowed)
         }
-        else if(data.login == 1){
-            alert("your in !!!")
+        else{
+            window.location.replace("/dashboard")
         }
     })
 })

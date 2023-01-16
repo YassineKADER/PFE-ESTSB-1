@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, session, redirect, url_for
 import pyrebase
+import os
 
 app = Flask(__name__)
 
@@ -15,33 +16,39 @@ config = {
 
 firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
-email,password ="",""
-app.secret_key = 'secret_word'
+email, password = "", ""
+app.secret_key = os.urandom(28)
 
 
 @app.route('/')
 def index():
-    return render_template("Login.html")
+    return {'mainview':1}
 
 
-@app.route('/logout', methods=['POST'])
+@app.route('/logout', methods=['POST','GET'])
 def logout():
-    pass
+    session.pop('user', None)
+    return redirect('/')
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == "POST":
         login_data = request.get_json()
+        print(login_data)
         email = login_data.get("email")
         password = login_data.get("password")
         try:
             print(email, password)
             user = auth.sign_in_with_email_and_password(email, password)
-            print(user)
-            return {"login":1}
+            session.pop('user', None)
+            session['user'] = user
+            print("cool")
+            return {"login": True}
         except:
             print("out")
-            return {"login":0}
+            return {"login": False}
+    return render_template("Login.html")
+
 
 @app.route('/forgotpassword', methods=["POST", "GET"])
 def forgot():
@@ -50,14 +57,21 @@ def forgot():
         email = info.get("email")
         try:
             auth.send_password_reset_email(email)
-            return {"sent":True}
+            return {"sent": True}
         except:
-            return {"sent":False}
+            return {"sent": False}
     return render_template("ForgotPass.html")
+
 
 @app.route('/dashboard', methods=["POST", "GET"])
 def dashboard():
-    return render_template("Dashboard.html")
+    try:
+        if session['user']:
+            return render_template("Dashboard.html")
+    except:
+        return redirect(url_for("login"))
+    return redirect(url_for("login"))
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=1212)

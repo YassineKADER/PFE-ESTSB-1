@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, session, redirect
+from flask import Flask, request, render_template, session, redirect, url_for
 import pyrebase
 
 app = Flask(__name__)
@@ -54,6 +54,10 @@ def forgot():
         except:
             return {"sent":False}
     return render_template("ForgotPass.html")
+
+@app.route('dashboard', methods=["POST", "GET"])
+def dashboard():
+    pass
 
 if __name__ == "__main__":
     app.run(debug=True, port=1212)

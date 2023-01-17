@@ -86,3 +86,28 @@ body{
 #nav{
     background-color:#161b22;
 }
+
+.buttons-container{
+    margin-top: 10px;
+    height: 10vh;
+    display: flex;
+    align-items: cente;
+    justify-content: center;
+}
+
+.buttons-container button{
+    height: 40px;
+    background-color: transparent;
+    color: white;
+    margin: 3%;
+    font-size: 1rem;
+    padding: 0 3.2%;
+    border: 1.5px white solid;
+    transition: transform .2s, background-color .2s ease;
+    border-radius: 5px;
+}
+
+.buttons-container button:hover{
+    background-color: white;
+    color: #0d1117;
+}

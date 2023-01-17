@@ -1,11 +1,11 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
 import { getDatabase, ref, child, onValue, get } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
-const para=document.getElementById("check");
+const para = document.getElementById("check");
 
-
+//fetch the info of the user
 let user_data;
 await fetch('/user').then(response => response.json()).then(data => user_data = data);
-// config
+// firebase config
 const firebaseConfig = {
     apiKey: "AIzaSyBgGx67w032_zncuZ37tFYPrm02rH1XbrY",
     authDomain: "wise-baton-353710.firebaseapp.com",
@@ -19,12 +19,58 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 
-function getAllData(){
+//reltime function
+function getAllData() {
     console.log("function");
     const dbref = ref(db, "Users");
     console.log(user_data.localId)
-    onValue(dbref, (data => para.innerHTML = JSON.stringify(data.val()[user_data.localId])));
+    onValue(dbref, (data => {
+        para.innerHTML = data.val()[user_data.localId]["freespace"] + "/" + data.val()[user_data.localId]["totalplace"];
+        chart1.data.datasets[0].data[0] = data.val()[user_data.localId]["freespace"];
+        chart1.data.datasets[0].data[1] = data.val()[user_data.localId]["totalplace"] - data.val()[user_data.localId]["freespace"];
+        chart1.update();
+        //console.log(data.val()[user_data.localId]["freespace"], data.val()[user_data.localId]["totalplace"]);
+
+    }));
 }
-
-
 getAllData();
+
+//Doughnut chart
+const chart = document.getElementById("chart")
+var options = {
+    responsive: true,
+    title: {
+        display: true,
+        position: "top",
+        text: "Doughnut Chart",
+        fontSize: 18,
+        fontColor: "#111"
+    }
+};
+
+var data1 = {
+    labels: ["Reserved places", "Free spaces"],
+    datasets: [
+        {
+            label: "Places",
+            data: [10, 0],
+            backgroundColor: [
+                "#1C82AD",
+                "#03C988"
+            ],
+            borderColor: [
+                "#1C82AD",
+                "#03C988"
+            ],
+            borderWidth: [1, 5]
+        }
+    ]
+};
+var chart1 = new Chart(chart, {
+    type: "doughnut",
+    data: data1,
+    options: options
+});
+
+
+

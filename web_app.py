@@ -1,4 +1,6 @@
 from flask import Flask, request, render_template, session, redirect, url_for
+from run import *
+from f_chose_spots import *
 import pyrebase
 import os
 

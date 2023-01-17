@@ -111,3 +111,7 @@ body{
     background-color: white;
     color: #0d1117;
 }
+
+.chart-container{
+    height: 25vw;
+}

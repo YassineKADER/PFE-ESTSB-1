@@ -49,20 +49,21 @@ var options = {
 };
 
 var data1 = {
-    labels: ["Reserved places", "Free spaces"],
+    labels: ["Free scpaces", "Reserved places"],
     datasets: [
         {
             label: "Places",
-            data: [10, 0],
+            data: [0, 10],
             backgroundColor: [
-                "#1C82AD",
-                "#03C988"
+                "#03C988",
+                "#1C82AD"
+                
             ],
             borderColor: [
-                "#1C82AD",
-                "#03C988"
+                "#00de95",
+                "#1ea1d9"
             ],
-            borderWidth: [1, 5]
+            borderWidth: [5, 1]
         }
     ]
 };

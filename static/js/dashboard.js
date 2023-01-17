@@ -1,4 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+import { getDatabase, ref, child, onValue, get } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+const para=document.getElementById("check");
+
+
 let user_data;
 await fetch('/user').then(response => response.json()).then(data => user_data = data);
 // config
@@ -13,7 +17,14 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const db = getDatabase();
 
-console.log(user_data);
+function getAllData(){
+    console.log("function");
+    const dbref = ref(db, "Users");
+    console.log(user_data.localId)
+    onValue(dbref, (data => para.innerHTML = JSON.stringify(data.val()[user_data.localId])));
+}
 
-console.log("kl")
+
+getAllData();

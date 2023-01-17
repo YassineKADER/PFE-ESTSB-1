@@ -16,7 +16,7 @@ config = {
 
 firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
-email, password = "", ""
+email, password, user = "", "", {}
 app.secret_key = os.urandom(28)
 
 
@@ -28,6 +28,8 @@ def index():
 @app.route('/logout', methods=['POST','GET'])
 def logout():
     session.pop('user', None)
+    global user
+    user = {}
     return redirect('/')
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -37,6 +39,7 @@ def login():
         email = login_data.get("email")
         password = login_data.get("password")
         try:
+            global user
             user = auth.sign_in_with_email_and_password(email, password)
             session.pop('user', None)
             session['user'] = user
@@ -68,6 +71,9 @@ def dashboard():
         return redirect(url_for("login"))
     return redirect(url_for("login"))
 
+@app.route('/user', methods=["POST", "GET"])
+def getUser():
+    return user;
 
 if __name__ == "__main__":
     app.run(debug=True, port=1212)

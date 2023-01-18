@@ -18,7 +18,7 @@ config = {
 
 firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
-email, password, user = "", "", {}
+email, password, user, status = "", "", {}, False
 app.secret_key = os.urandom(28)
 
 
@@ -68,6 +68,7 @@ def forgot():
 def dashboard():
     try:
         if session['user']:
+            print(session['user'])
             return render_template("Dashboard.html")
     except:
         return redirect(url_for("login"))
@@ -76,6 +77,15 @@ def dashboard():
 @app.route('/user', methods=["POST", "GET"])
 def getUser():
     return user;
+
+@app.route('/run', methods=["POST","GET"])
+def run():
+    
+    if request.method == "POST":
+        print(request.get_json())
+    else:
+        print("hello")
+    return {'im working':"bitch"}
 
 if __name__ == "__main__":
     app.run(debug=True, port=1212)

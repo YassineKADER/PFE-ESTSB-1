@@ -57,7 +57,7 @@ var data1 = {
             backgroundColor: [
                 "#03C988",
                 "#1C82AD"
-                
+
             ],
             borderColor: [
                 "#00de95",
@@ -74,4 +74,11 @@ var chart1 = new Chart(chart, {
 });
 
 
-
+document.getElementById("start").addEventListener("click", (event) => {
+    let inscreenCollection = {"status":true, "parameters":false}
+    let headers = {
+        type: "application/json"
+    };
+    let blob = new Blob([JSON.stringify(inscreenCollection)], headers);
+    navigator.sendBeacon('/run', blob);
+});

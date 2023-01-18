@@ -5,6 +5,7 @@ import time
 import json
 import traceback
 import pyrebase
+import requests
 
 config = {
     "apiKey": "AIzaSyBgGx67w032_zncuZ37tFYPrm02rH1XbrY",
@@ -37,10 +38,11 @@ def empty(a):
 def update_data():
     pass
 
-
-status = True
+status = False
 
 def start(perview, user_token, user_id):
+    global status
+    print(status)
     def checkSpaces():
         spaces = 0
         for pos in posList:
@@ -73,6 +75,7 @@ def start(perview, user_token, user_id):
     try:
         next = []
         perv = next
+        
         while status:
             blockSize = data["blockSize"]
             C = data["C"]

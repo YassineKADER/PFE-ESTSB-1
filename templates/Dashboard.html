@@ -24,19 +24,37 @@
       <input class="btn btn-outline-warning my-2 my-sm-0" type="submit" value="Sign out">
     </form>
   </nav>
-  <div class="buttons-container">
-    <button>Chose spots</button>
-    <button>Modify parameters</button>
-    <button id="start">Start</bbutton>
-      <button>Stop</button>
-  </div>
+
   <div class="container-fluid mt-md-5 mt-sm-2" style="width: 95%;">
-    <div class="row chart-container">
-      <div class="col-8 w-100" style="border-radius:12px;background-color: #161b22;">
+    <div class="row"></div>
+    <div class="row chart-container align-items-center">
+      <div class="col-md-2 d-flex item-container">
+        <ul class="list-group w-100">
+          <li class="list-group-item d-flex justify-content-between align-items-center item" id="start">
+            <span><i class="fa-solid fa-play"></i> Start Tracking</span>
+            <span class="badge bg-primary rounded-pill"></span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center item" id="settings">
+            <span><i class="fa-solid fa-gears"></i> Settings</span>
+            <span class="badge bg-primary rounded-pill"></span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center item" id="rechose">
+            <span><i class="fa-solid fa-list"></i> Chose Spots</span>
+            <span class="badge bg-primary rounded-pill"></span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center item" id="stop">
+            <span><i class="fa-sharp fa-solid fa-circle-stop"></i> Stop Tracking</span>
+            <span class="badge bg-success rounded-pill"></span>
+          </li>
+        </ul>
       </div>
-      <div class="col-4 w-100" style="">
+      <div class="col-md-7 w-100" style="border-radius:12px;">
+        <h5 class="text-white">Perview Image:</h5>
+        <img src="static/pos.png" alt="perview image" id="prv-img" style="max-width:100%;max-height:100%;">
+      </div>
+      <div class="col-md-3 w-100">
         <h3 id="check" style="color: white;text-align: center;">/</h3>
-        <canvas id="chart" class="w-100" style=""></canvas>
+        <canvas id="chart" class="w-100"></canvas>
       </div>
     </div>
   </div>

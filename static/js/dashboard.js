@@ -75,7 +75,7 @@ var chart1 = new Chart(chart, {
 
 
 document.getElementById("start").addEventListener("click", (event) => {
-    let inscreenCollection = {"status":true, "parameters":false}
+    let inscreenCollection = {"status":true, "settings":false}
     let headers = {
         type: "application/json"
     };

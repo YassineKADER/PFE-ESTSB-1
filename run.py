@@ -77,6 +77,7 @@ def start(perview, user_token, user_id):
             status = json.loads(requests.get(url="http://127.0.0.1:1212/status").text).get("status")
             print(status)
             if status==False:
+                cv2.destroyAllWindows()
                 return
             blockSize = data["blockSize"]
             C = data["C"]

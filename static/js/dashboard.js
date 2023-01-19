@@ -29,8 +29,10 @@ function getAllData() {
         chart1.data.datasets[0].data[0] = data.val()[user_data.localId]["freespace"];
         chart1.data.datasets[0].data[1] = data.val()[user_data.localId]["totalplace"] - data.val()[user_data.localId]["freespace"];
         chart1.update();
+        const prvimg = document.createElement("img");
+        prvimg.setAttribute("src","static/pos.png");
+        document.getElementById("perview").replaceWith(prvimg);
         //console.log(data.val()[user_data.localId]["freespace"], data.val()[user_data.localId]["totalplace"]);
-
     }));
 }
 getAllData();
@@ -76,6 +78,16 @@ var chart1 = new Chart(chart, {
 
 document.getElementById("start").addEventListener("click", (event) => {
     let inscreenCollection = {"status":true, "settings":false}
+    let headers = {
+        type: "application/json"
+    };
+    let blob = new Blob([JSON.stringify(inscreenCollection)], headers);
+    navigator.sendBeacon('/status', blob);
+    navigator.sendBeacon('/run', blob);
+});
+
+document.getElementById("settings").addEventListener("click", (event) => {
+    let inscreenCollection = {"status":true, "settings":true}
     let headers = {
         type: "application/json"
     };

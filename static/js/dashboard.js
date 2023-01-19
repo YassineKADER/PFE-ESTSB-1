@@ -19,7 +19,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 
-//reltime function
+//reltime get data function (and updtae the chart)-----------------------------------------------
 function getAllData() {
     console.log("function");
     const dbref = ref(db, "Users");
@@ -30,14 +30,14 @@ function getAllData() {
         chart1.data.datasets[0].data[1] = data.val()[user_data.localId]["totalplace"] - data.val()[user_data.localId]["freespace"];
         chart1.update();
         const prvimg = document.createElement("img");
-        prvimg.setAttribute("src","static/pos.png");
+        prvimg.setAttribute("src", "static/pos.png");
         document.getElementById("perview").replaceWith(prvimg);
         //console.log(data.val()[user_data.localId]["freespace"], data.val()[user_data.localId]["totalplace"]);
     }));
 }
 getAllData();
 
-//Doughnut chart
+//Doughnut chart-----------------------------
 const chart = document.getElementById("chart")
 var options = {
     responsive: true,
@@ -49,7 +49,6 @@ var options = {
         fontColor: "#111"
     }
 };
-
 var data1 = {
     labels: ["Free scpaces", "Reserved places"],
     datasets: [
@@ -59,7 +58,6 @@ var data1 = {
             backgroundColor: [
                 "#03C988",
                 "#1C82AD"
-
             ],
             borderColor: [
                 "#00de95",
@@ -74,10 +72,11 @@ var chart1 = new Chart(chart, {
     data: data1,
     options: options
 });
+//-----------------------------------------
 
-
+//start, stop,...------------------------------------
 document.getElementById("start").addEventListener("click", (event) => {
-    let inscreenCollection = {"status":true, "settings":false}
+    let inscreenCollection = { "status": true, "settings": false }
     let headers = {
         type: "application/json"
     };
@@ -87,7 +86,7 @@ document.getElementById("start").addEventListener("click", (event) => {
 });
 
 document.getElementById("settings").addEventListener("click", (event) => {
-    let inscreenCollection = {"status":true, "settings":true}
+    let inscreenCollection = { "status": true, "settings": true }
     let headers = {
         type: "application/json"
     };
@@ -97,10 +96,11 @@ document.getElementById("settings").addEventListener("click", (event) => {
 });
 
 document.getElementById("stop").addEventListener("click", (event) => {
-    let inscreenCollection = {"status":false, "settings":false}
+    let inscreenCollection = { "status": false, "settings": false }
     let headers = {
         type: "application/json"
     };
     let blob = new Blob([JSON.stringify(inscreenCollection)], headers);
     navigator.sendBeacon('/status', blob);
 })
+//--------------------------------------------------------------------------

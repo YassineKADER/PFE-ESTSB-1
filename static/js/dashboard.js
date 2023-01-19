@@ -80,5 +80,15 @@ document.getElementById("start").addEventListener("click", (event) => {
         type: "application/json"
     };
     let blob = new Blob([JSON.stringify(inscreenCollection)], headers);
+    navigator.sendBeacon('/status', blob);
     navigator.sendBeacon('/run', blob);
 });
+
+document.getElementById("stop").addEventListener("click", (event) => {
+    let inscreenCollection = {"status":false, "settings":false}
+    let headers = {
+        type: "application/json"
+    };
+    let blob = new Blob([JSON.stringify(inscreenCollection)], headers);
+    navigator.sendBeacon('/status', blob);
+})

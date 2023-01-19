@@ -18,7 +18,7 @@ config = {
 
 firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
-email, password, user = "", "", {}
+email, password, user, status = "", "", {}, False
 app.secret_key = os.urandom(28)
 
 
@@ -83,15 +83,19 @@ def run():
     if request.method == "POST":
         global status 
         status = True
-        start(False,user_token="eyJhbGciOiJSUzI1NiIsImtpZCI6ImQwNTU5YzU5MDgzZDc3YWI2NDUxOThiNTIxZmM4ZmVmZmVlZmJkNjIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vd2lzZS1iYXRvbi0zNTM3MTAiLCJhdWQiOiJ3aXNlLWJhdG9uLTM1MzcxMCIsImF1dGhfdGltZSI6MTY3NDA3MzI5MCwidXNlcl9pZCI6IkFBcDM1RmdOT0dQNnBkaWg2M0JQRVJ0VGlrdTEiLCJzdWIiOiJBQXAzNUZnTk9HUDZwZGloNjNCUEVSdFRpa3UxIiwiaWF0IjoxNjc0MDczMjkwLCJleHAiOjE2NzQwNzY4OTAsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsiYWRtaW5AbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.YUzajkfo59KwtD3lgipnpP1T1_QdOC56rk5IsCri1tFenhbdEdoxJA-NpsktA9snMadTiSDI0xqI-f84nYtnJAB_UhOGyF6qTsID06MuSP5pppuFLl8C9069JD6LFr6uVPc_K0P5m6CzQ5AjEQx2CLQ4_oeG4i_5CbFjqobdi5HeXUCfZymkz98KF8fEfBKQvmv-1jzRnCiU71Nt32t8zk-x8H933MKR_zNQWeRQSeLxnze7u6VqRBa6npYuS5hFH3pY2ZOMXOetOy9NgkZ8n9Ptpbkff-BcM9SGWyJWTfjgSd85ovYn6b6V4WrUVaZWUD6qtImhPFd20gJiZzudMQ",user_id="AAp35FgNOGP6pdih63BPERtTiku1")
+        start(False,user_token="eyJhbGciOiJSUzI1NiIsImtpZCI6ImQwNTU5YzU5MDgzZDc3YWI2NDUxOThiNTIxZmM4ZmVmZmVlZmJkNjIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vd2lzZS1iYXRvbi0zNTM3MTAiLCJhdWQiOiJ3aXNlLWJhdG9uLTM1MzcxMCIsImF1dGhfdGltZSI6MTY3NDEzNDE1MywidXNlcl9pZCI6IkFBcDM1RmdOT0dQNnBkaWg2M0JQRVJ0VGlrdTEiLCJzdWIiOiJBQXAzNUZnTk9HUDZwZGloNjNCUEVSdFRpa3UxIiwiaWF0IjoxNjc0MTM0MTUzLCJleHAiOjE2NzQxMzc3NTMsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsiYWRtaW5AbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.MRkR5XWUlVFi017sakFtHIjHB5g6MKvqRDjdsPNnWunwl9piscOMb2V85bDN5px7NmR7Xn8U2bV5rwFhOn57lS8P9ZVshgtdUvHQbnE39X0vWdsGnpr4w5EEt8Okp15ZrCCB_tGgWov-V7P8K2v1EqO87btqCUs0qrLpBMUFtScGf1BvxLPQdQELsAYeebpUNWHVwpNMrrK8UdGz3pAYGvClquThq14kdUseq53lU4C8fgGRDeMAb-Ihdmvz_jGmacLag4kZ3nRznMrrbvi3R-NVzOIIyB7JQWoFEnhQ0GeWykSsBFsAIJH2SoGq0AMGvbkfTHPJPt9dv7zVDu5l2Q",user_id="AAp35FgNOGP6pdih63BPERtTiku1")
         print(status)
     else:
         print("hello")
     return {'im working':"bitch"}
 
-@app.route('/status')
+@app.route('/status', methods=["POST", "GET"])
 def get_status():
-    pass
+    if request.method == "POST":
+        global status
+        data = request.get_json()
+        status = data.get("status")
+    return {"status":status}
 
 if __name__ == "__main__":
-    app.run(debug=True, port=1212)
+    app.run(debug=False, port=1212)

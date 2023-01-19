@@ -38,11 +38,9 @@ def empty(a):
 def update_data():
     pass
 
-status = False
 
 def start(perview, user_token, user_id):
-    global status
-    print(status)
+    status = False
     def checkSpaces():
         spaces = 0
         for pos in posList:
@@ -75,8 +73,11 @@ def start(perview, user_token, user_id):
     try:
         next = []
         perv = next
-        
-        while status:
+        while True:
+            status = json.loads(requests.get(url="http://127.0.0.1:1212/status").text).get("status")
+            print(status)
+            if status==False:
+                return
             blockSize = data["blockSize"]
             C = data["C"]
             ksize_Blur = data["ksize_Blur"]
@@ -120,8 +121,9 @@ def start(perview, user_token, user_id):
                 if key == ord('r'):
                     pass
             time.sleep(0.5)#just for testing
-            #print(blockSize, C, ksize_Blur)
+            print(blockSize, C, ksize_Blur)
     except: 
         traceback.print_exc()
+        return
 
-#start(False,"eyJhbGciOiJSUzI1NiIsImtpZCI6ImQwNTU5YzU5MDgzZDc3YWI2NDUxOThiNTIxZmM4ZmVmZmVlZmJkNjIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vd2lzZS1iYXRvbi0zNTM3MTAiLCJhdWQiOiJ3aXNlLWJhdG9uLTM1MzcxMCIsImF1dGhfdGltZSI6MTY3NDA1MzIxMCwidXNlcl9pZCI6IkFBcDM1RmdOT0dQNnBkaWg2M0JQRVJ0VGlrdTEiLCJzdWIiOiJBQXAzNUZnTk9HUDZwZGloNjNCUEVSdFRpa3UxIiwiaWF0IjoxNjc0MDUzMjEwLCJleHAiOjE2NzQwNTY4MTAsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsiYWRtaW5AbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.gQsfpl_wSUyI-DvKnQNNZ8HQak8xv8U_MWq49-Wz_NTWbPBnQTeKghLA4T6bczqJfF-AwFV49sdez-YtsxHIBbpwg1ng561b2SEK2f52WS3OKQqOzzI4u_yklO0kJEBoNqiDqrp4J21fzM4Y0wUOxy2VsQIvo_L0vhwq1fShb4e9V0YT8zcV2n-nk1pfRo8ohDxKMpQb9BeMoUSOMORpNUjNm2FQXqN0qYwtuA_zcbWDjKa5BXlnQnnFTqCDy8W-avWGVgpKN62v6Xl2eu30pHshKc3QobirQ-FXdBVpwJESAPbbrJl1ov3_aWA6NmGF3smMOi90VcVEWJ2uxdNfMg","AAp35FgNOGP6pdih63BPERtTiku1")
+#start(False,"eyJhbGciOiJSUzI1NiIsImtpZCI6ImQwNTU5YzU5MDgzZDc3YWI2NDUxOThiNTIxZmM4ZmVmZmVlZmJkNjIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vd2lzZS1iYXRvbi0zNTM3MTAiLCJhdWQiOiJ3aXNlLWJhdG9uLTM1MzcxMCIsImF1dGhfdGltZSI6MTY3NDEzNDE1MywidXNlcl9pZCI6IkFBcDM1RmdOT0dQNnBkaWg2M0JQRVJ0VGlrdTEiLCJzdWIiOiJBQXAzNUZnTk9HUDZwZGloNjNCUEVSdFRpa3UxIiwiaWF0IjoxNjc0MTM0MTUzLCJleHAiOjE2NzQxMzc3NTMsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsiYWRtaW5AbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.MRkR5XWUlVFi017sakFtHIjHB5g6MKvqRDjdsPNnWunwl9piscOMb2V85bDN5px7NmR7Xn8U2bV5rwFhOn57lS8P9ZVshgtdUvHQbnE39X0vWdsGnpr4w5EEt8Okp15ZrCCB_tGgWov-V7P8K2v1EqO87btqCUs0qrLpBMUFtScGf1BvxLPQdQELsAYeebpUNWHVwpNMrrK8UdGz3pAYGvClquThq14kdUseq53lU4C8fgGRDeMAb-Ihdmvz_jGmacLag4kZ3nRznMrrbvi3R-NVzOIIyB7JQWoFEnhQ0GeWykSsBFsAIJH2SoGq0AMGvbkfTHPJPt9dv7zVDu5l2Q","AAp35FgNOGP6pdih63BPERtTiku1")

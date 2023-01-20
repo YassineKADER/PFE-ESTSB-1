@@ -29,9 +29,8 @@ function getAllData() {
         chart1.data.datasets[0].data[0] = data.val()[user_data.localId]["freespace"];
         chart1.data.datasets[0].data[1] = data.val()[user_data.localId]["totalplace"] - data.val()[user_data.localId]["freespace"];
         chart1.update();
-        const prvimg = document.createElement("img");
-        prvimg.setAttribute("src", "static/pos.png");
-        document.getElementById("perview").replaceWith(prvimg);
+        console.log(`static/pos.png${"?t="+new Date().getTime()}`)
+        document.getElementById("perview").src=`static/pos.png${"?t="+new Date().getTime()}`;
         //console.log(data.val()[user_data.localId]["freespace"], data.val()[user_data.localId]["totalplace"]);
     }));
 }

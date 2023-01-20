@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, session, redirect, url_for, send_from_directory
+from flask import Flask, request, render_template, session, redirect, url_for
 from run import *
 from f_chose_spots import *
 import pyrebase
@@ -91,9 +91,6 @@ def run():
         print("hello")
     return {'im working':"bitch"}
 
-@app.route('/update', methods=["POST", "GET"])
-def uploaded():
-    return send_from_directory("templates", "pos.png")
 
 @app.route('/status', methods=["POST", "GET"])
 def get_status():

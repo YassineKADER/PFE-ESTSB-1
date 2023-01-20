@@ -111,7 +111,7 @@ def start(perview, user_token, user_id):
             perv = next
             next = checkSpaces()
             if(next != perv):
-                cv2.imwrite("templates/pos.png",img=img)
+                cv2.imwrite("static/pos.png",img=img)
                 db.child("Users").child(user_id).update({"freespace":next[0],"totalplace":next[1]}, token=user_token)
             # Display Output
             if perview :

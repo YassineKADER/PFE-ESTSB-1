@@ -77,5 +77,3 @@ def start_chosing(path):
         cv2.imshow("Image", img)
         cv2.setMouseCallback("Image", mouseClick)
         cv2.waitKey(1)
-
-print(checkUrl("holla"))

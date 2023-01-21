@@ -27,37 +27,34 @@
 
   <div class="container-fluid mt-md-5 mt-sm-2" style="width: 95%">
     <div class="row align-items-center flex-row justify-content-center" id="toggle-start">
-      <button data-toggle="modal" data-target="#startModal">
-        <i class="fa-solid fa-play"></i> Start Tracking
-      </button>
-      <button id="settings">
-        <i class="fa-solid fa-gears"></i> Settings
-      </button>
-      <button><i class="fa-solid fa-list"></i> Chose Spots</button>
-      <button id="stop">
-        <i class="fa-sharp fa-solid fa-circle-stop"></i>Stop Tracking
-      </button>
+      <button data-toggle="modal" data-target="#startModal" class="operation-btn"><i class="fa-solid fa-play"></i> Start
+        Tracking</button>
+      <button id="settings" class="operation-btn"><i class="fa-solid fa-gears"></i> Settings</button>
+      <button class="operation-btn"><i class="fa-solid fa-list"></i> Chose Spots</button>
+      <button id="stop" class="operation-btn"><i class="fa-sharp fa-solid fa-circle-stop"></i> Stop Tracking</button>
 
       <!-- Modal -->
       <div class="modal fade" id="startModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h3 class="modal-title" id="exampleModalLabel">Chose Video Input</h3>
+        aria-hidden="true" style="border-radius: 12px;">
+        <div class="modal-dialog text-white" role="document">
+          <div class="modal-content dark-bg">
+            <div class="modal-header dark-bg">
+              <h3 class="modal-title dark-bg" id="exampleModalLabel">Chose Video Input</h3>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              <input type="url" id="ipcameraurl">
-              <input type="file" id="videofile">
+              <div class="form-group">
+                <label for="URL:">URL:</label>
+                <input type="url" id="ipcameraurl" class="form-control dark-bg" placeholder="URL OF AN IP CAMERA OR PATH OF VIDEO"
+              </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">
                 Close
               </button>
-              <button type="button" class="btn btn-primary" id="start">
+              <button type="button" class="btn btn-primary" id="start" data-dismiss="modal">
                 Start
               </button>
             </div>

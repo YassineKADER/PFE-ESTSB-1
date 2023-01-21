@@ -7,6 +7,11 @@
     font-family: 'Quicksand', sans-serif;
 }
 
+:root{
+    --dark_2:#161b22;
+    --dark:#0d1117;
+}
+
 body {
     height: 100vh;
     background-color: #0d1117;
@@ -107,7 +112,7 @@ body {
     height: 80vh;
 }
 
-#toggle-start button{
+#toggle-start button.operation-btn{
     background-color: #0d1117;
     color: white;
     padding: 0.75rem;
@@ -116,7 +121,11 @@ body {
     border-radius: 5px;
 }
 
-#toggle-start button:hover{
+#toggle-start button.operation-btn:hover{
     background-color: white;
     color: #0d1117;
+}
+
+.dark-bg{
+    background-color: #161b22;
 }

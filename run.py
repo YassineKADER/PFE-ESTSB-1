@@ -21,8 +21,6 @@ firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 
 #TODO make the falsk project for the app
-
-cap = cv2.VideoCapture('video.webm')
 width, height = 107, 250
 with open('CarParkPos2', 'rb') as f:
     posList = pickle.load(f)
@@ -39,7 +37,8 @@ def update_data():
     pass
 
 
-def start(perview, user_token, user_id):
+def start(perview, user_token, user_id, video_location):
+    cap = cv2.VideoCapture('HHHHH.webm')
     status = False
     def checkSpaces():
         spaces = 0

@@ -91,6 +91,11 @@ def run():
         print("hello")
     return {'im working':"bitch"}
 
+@app.route('/run/validurl', methods=["POST"])
+def checkout():
+        url = request.get_json().get("url")
+        return checkUrl(url)
+
 
 @app.route('/status', methods=["POST", "GET"])
 def get_status():

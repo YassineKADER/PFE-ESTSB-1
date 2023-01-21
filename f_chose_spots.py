@@ -3,6 +3,15 @@ import pickle
 import json
 import requests
 
+def checkUrl(URL):
+    try:
+        cat = cv2.VideoCapture(URL)
+        print(cat)
+    except cv2.error as e:
+        print("false")
+        return {"valid": False}
+    return {"valid": True}
+
 def start_chosing(path):
     width, height = 0, 0
 
@@ -69,4 +78,4 @@ def start_chosing(path):
         cv2.setMouseCallback("Image", mouseClick)
         cv2.waitKey(1)
 
-start_chosing("carPark.mp4")
+print(checkUrl("holla"))

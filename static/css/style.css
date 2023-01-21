@@ -106,3 +106,17 @@ body {
 .chart-container {
     height: 80vh;
 }
+
+#toggle-start button{
+    background-color: #0d1117;
+    color: white;
+    padding: 0.75rem;
+    border: solid 1px white;
+    margin: 1.5rem;
+    border-radius: 5px;
+}
+
+#toggle-start button:hover{
+    background-color: white;
+    color: #0d1117;
+}

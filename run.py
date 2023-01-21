@@ -61,8 +61,7 @@ def start(perview, user_token, user_id):
 
             cv2.rectangle(img, (x, y), (x + w, y + h), color, thic)
 
-            cv2.putText(img, str(cv2.countNonZero(imgCrop)), (x, y + h - 6), cv2.FONT_HERSHEY_PLAIN, 1,
-                        color, 2)
+            #cv2.putText(img, str(cv2.countNonZero(imgCrop)), (x, y + h - 6), cv2.FONT_HERSHEY_PLAIN, 1,color, 2)
         return [spaces, len(posList)]
     if perview :
         cv2.namedWindow("Parameters")

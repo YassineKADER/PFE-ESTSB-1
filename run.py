@@ -37,8 +37,8 @@ def update_data():
     pass
 
 
-def start(perview, user_token, user_id, video_location):
-    cap = cv2.VideoCapture('HHHHH.webm')
+def start(perview, user_token, user_id, video_location="video.webm"):
+    cap = cv2.VideoCapture(video_location)
     status = False
     def checkSpaces():
         spaces = 0
@@ -62,21 +62,18 @@ def start(perview, user_token, user_id, video_location):
 
             #cv2.putText(img, str(cv2.countNonZero(imgCrop)), (x, y + h - 6), cv2.FONT_HERSHEY_PLAIN, 1,color, 2)
         return [spaces, len(posList)]
-    if perview :
-        cv2.namedWindow("Parameters")
-        cv2.resizeWindow("Parameters", 640, 240)
-        cv2.createTrackbar("blockSize", "Parameters", data["blockSize"], 50, empty)
-        cv2.createTrackbar("C", "Parameters", data["C"], 50, empty)
-        cv2.createTrackbar("ksize_Blur", "Parameters", data["ksize_Blur"], 50, empty)
     try:
+        if perview :
+            cv2.namedWindow("Parameters")
+            cv2.resizeWindow("Parameters", 640, 240)
+            cv2.createTrackbar("blockSize", "Parameters", data["blockSize"], 50, empty)
+            cv2.createTrackbar("C", "Parameters", data["C"], 50, empty)
+            cv2.createTrackbar("ksize_Blur", "Parameters", data["ksize_Blur"], 50, empty)
         next = []
         perv = next
         while True:
             status = json.loads(requests.get(url="http://127.0.0.1:1212/status").text).get("status")
             print(status)
-            if status==False:
-                cv2.destroyAllWindows()
-                return
             blockSize = data["blockSize"]
             C = data["C"]
             ksize_Blur = data["ksize_Blur"]
@@ -121,8 +118,10 @@ def start(perview, user_token, user_id, video_location):
                     pass
             time.sleep(0.5)#just for testing
             print(blockSize, C, ksize_Blur)
+        cap.release()
+        cv2.destroyAllWindows()
     except: 
-        traceback.print_exc()
+        #traceback.print_exc()
         return
 
 #start(False,"eyJhbGciOiJSUzI1NiIsImtpZCI6ImQwNTU5YzU5MDgzZDc3YWI2NDUxOThiNTIxZmM4ZmVmZmVlZmJkNjIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vd2lzZS1iYXRvbi0zNTM3MTAiLCJhdWQiOiJ3aXNlLWJhdG9uLTM1MzcxMCIsImF1dGhfdGltZSI6MTY3NDEzNDE1MywidXNlcl9pZCI6IkFBcDM1RmdOT0dQNnBkaWg2M0JQRVJ0VGlrdTEiLCJzdWIiOiJBQXAzNUZnTk9HUDZwZGloNjNCUEVSdFRpa3UxIiwiaWF0IjoxNjc0MTM0MTUzLCJleHAiOjE2NzQxMzc3NTMsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsiYWRtaW5AbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.MRkR5XWUlVFi017sakFtHIjHB5g6MKvqRDjdsPNnWunwl9piscOMb2V85bDN5px7NmR7Xn8U2bV5rwFhOn57lS8P9ZVshgtdUvHQbnE39X0vWdsGnpr4w5EEt8Okp15ZrCCB_tGgWov-V7P8K2v1EqO87btqCUs0qrLpBMUFtScGf1BvxLPQdQELsAYeebpUNWHVwpNMrrK8UdGz3pAYGvClquThq14kdUseq53lU4C8fgGRDeMAb-Ihdmvz_jGmacLag4kZ3nRznMrrbvi3R-NVzOIIyB7JQWoFEnhQ0GeWykSsBFsAIJH2SoGq0AMGvbkfTHPJPt9dv7zVDu5l2Q","AAp35FgNOGP6pdih63BPERtTiku1")

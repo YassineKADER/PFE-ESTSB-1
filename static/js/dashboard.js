@@ -75,17 +75,24 @@ var chart1 = new Chart(chart, {
 
 //start, stop,...------------------------------------
 document.getElementById("start").addEventListener("click", (event) => {
-    let inscreenCollection = { "status": true, "settings": false }
+    let url = document.getElementById("ipcameraurl").value;
+    let inscreenCollection = { "status": true, "settings": false, "url" : url}
     let headers = {
         type: "application/json"
     };
     let blob = new Blob([JSON.stringify(inscreenCollection)], headers);
     navigator.sendBeacon('/status', blob);
     navigator.sendBeacon('/run', blob);
+    fetch("/status").then(response => response.json()).then(data => {
+        if(data.status = false){
+            alert("Check yout url video plz")
+        }
+    });
 });
 
 document.getElementById("settings").addEventListener("click", (event) => {
-    let inscreenCollection = { "status": true, "settings": true }
+    let url = document.getElementById("ipcameraurl2").value;
+    let inscreenCollection = { "status": true, "settings": true,"url" : url }
     let headers = {
         type: "application/json"
     };
@@ -95,11 +102,22 @@ document.getElementById("settings").addEventListener("click", (event) => {
 });
 
 document.getElementById("stop").addEventListener("click", (event) => {
-    let inscreenCollection = { "status": false, "settings": false }
+    let inscreenCollection = { "status": false}
     let headers = {
         type: "application/json"
     };
     let blob = new Blob([JSON.stringify(inscreenCollection)], headers);
     navigator.sendBeacon('/status', blob);
+})
+
+document.getElementById("chosespots").addEventListener("click", (event) => {
+    let url = document.getElementById("ipcameraurl3").value;
+    let inscreenCollection = { "status": true, "settings": true,"url" : url }
+    let headers = {
+        type: "application/json"
+    };
+    let blob = new Blob([JSON.stringify(inscreenCollection)], headers);
+    navigator.sendBeacon('/status', blob);
+    navigator.sendBeacon('/run/chosespots', blob);
 })
 //--------------------------------------------------------------------------

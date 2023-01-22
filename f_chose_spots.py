@@ -3,16 +3,7 @@ import pickle
 import json
 import requests
 
-def checkUrl(URL):
-    try:
-        cat = cv2.VideoCapture(URL)
-        print(cat)
-    except cv2.error as e:
-        print("false")
-        return {"valid": False}
-    return {"valid": True}
-
-def start_chosing(path):
+def start_chosing(videolocation="video.webm"):
     width, height = 0, 0
 
     try:
@@ -51,7 +42,7 @@ def start_chosing(path):
             pickle.dump(posList, f)
 
     def getImage():
-        cap = cv2.VideoCapture(path)
+        cap = cv2.VideoCapture(videolocation)
         ret, img = cap.read()
         return img
 
@@ -77,3 +68,5 @@ def start_chosing(path):
         cv2.imshow("Image", img)
         cv2.setMouseCallback("Image", mouseClick)
         cv2.waitKey(1)
+
+#start_chosing()

@@ -84,17 +84,29 @@ def run():
         global status 
         status = True
         data = session['user']
-        print(data["idToken"], data["localId"])
+        #print(data["idToken"], data["localId"])
         settings = request.get_json().get("settings")
-        start(settings,data["idToken"], data["localId"])
+        url = request.get_json().get("url")
+        print(settings, url)
+        start(settings,data["idToken"], data["localId"], video_location=url)
     else:
         print("hello")
-    return {'im working':"bitch"}
+    return {'status':status}
 
-@app.route('/run/validurl', methods=["POST"])
-def checkout():
+@app.route('/run/chosespots', methods=["POST", "GET"])
+def chosespots():
+    if request.method == "POST":
+        global status 
+        status = True
         url = request.get_json().get("url")
-        return checkUrl(url)
+        try:
+            start_chosing(videolocation=url)
+        except:
+            status = False
+            return {'status': status}
+    else:
+        print("hello")
+    return {'status':status}
 
 
 @app.route('/status', methods=["POST", "GET"])

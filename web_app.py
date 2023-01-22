@@ -3,6 +3,8 @@ from run import *
 from f_chose_spots import *
 import pyrebase
 import os
+import sys
+from threading import Thread
 
 app = Flask(__name__)
 
@@ -87,8 +89,12 @@ def run():
         #print(data["idToken"], data["localId"])
         settings = request.get_json().get("settings")
         url = request.get_json().get("url")
+        startfunction = Thread(target=start, args=(settings,data["idToken"], data["localId"],url))
         print(settings, url)
-        start(settings,data["idToken"], data["localId"], video_location=url)
+        startfunction.start()
+        startfunction.join()
+        print("closed")
+        sys.exit(startfunction)
     else:
         print("hello")
     return {'status':status}

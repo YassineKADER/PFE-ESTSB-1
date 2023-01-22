@@ -4,6 +4,7 @@ import numpy as np
 import time
 import json
 import traceback
+from datetime import datetime
 import pyrebase
 import requests
 
@@ -38,7 +39,9 @@ def update_data():
 
 
 def start(perview, user_token, user_id, video_location="video.webm"):
+    print("hh1")
     cap = cv2.VideoCapture(video_location)
+    now = datetime.now()
     status = False
     def checkSpaces():
         spaces = 0
@@ -62,15 +65,18 @@ def start(perview, user_token, user_id, video_location="video.webm"):
 
             #cv2.putText(img, str(cv2.countNonZero(imgCrop)), (x, y + h - 6), cv2.FONT_HERSHEY_PLAIN, 1,color, 2)
         return [spaces, len(posList)]
+    print("hh2")
     try:
-        if perview :
-            cv2.namedWindow("Parameters")
-            cv2.resizeWindow("Parameters", 640, 240)
-            cv2.createTrackbar("blockSize", "Parameters", data["blockSize"], 50, empty)
-            cv2.createTrackbar("C", "Parameters", data["C"], 50, empty)
-            cv2.createTrackbar("ksize_Blur", "Parameters", data["ksize_Blur"], 50, empty)
+        """if perview :
+            cv2.namedWindow("Parameters"+str(now))
+            cv2.resizeWindow("Parameters"+str(now), 640, 240)
+            cv2.createTrackbar("blockSize", "Parameters"+str(now), data["blockSize"], 50, empty)
+            cv2.createTrackbar("C", "Parameters"+str(now), data["C"], 50, empty)
+            cv2.createTrackbar("ksize_Blur", "Parameters"+str(now), data["ksize_Blur"], 50, empty)
+            print("hh3")"""
         next = []
         perv = next
+        print("hh4")
         while True:
             status = json.loads(requests.get(url="http://127.0.0.1:1212/status").text).get("status")
             print(status)
@@ -85,10 +91,10 @@ def start(perview, user_token, user_id, video_location="video.webm"):
             imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             imgBlur = cv2.GaussianBlur(imgGray, (3, 3), 1)
             # ret, imgThres = cv2.threshold(imgBlur, 150, 255, cv2.THRESH_BINARY)
-            if perview:
-                blockSize = cv2.getTrackbarPos("blockSize", "Parameters")
-                C = cv2.getTrackbarPos("C", "Parameters")
-                ksize_Blur = cv2.getTrackbarPos("ksize_Blur", "Parameters")
+            """if perview:
+                blockSize = cv2.getTrackbarPos("blockSize", "Parameters"+str(now))
+                C = cv2.getTrackbarPos("C", "Parameters"+str(now))
+                ksize_Blur = cv2.getTrackbarPos("ksize_Blur", "Parameters"+str(now))"""
             if blockSize != data["blockSize"] or C != data["C"] or ksize_Blur !=data["ksize_Blur"]:
                 data["blockSize"] = blockSize
                 data["C"] = C
@@ -109,19 +115,25 @@ def start(perview, user_token, user_id, video_location="video.webm"):
                 cv2.imwrite("static/pos.png",img=img)
                 db.child("Users").child(user_id).update({"freespace":next[0],"totalplace":next[1]}, token=user_token)
             # Display Output
+            print("hh5")
             if perview :
-                cv2.imshow("Image", img)
-                cv2.imshow("ImageGray", imgThres)
-                cv2.imshow("ImageBlur", imgBlur)
-                key = cv2.waitKey(1)
-                if key == ord('r'):
-                    pass
+                cv2.imshow("Image"+str(now), img)
+                cv2.imshow("ImageGray"+str(now), imgThres)
+                cv2.imshow("ImageBlur"+str(now), imgBlur)
+            if cv2.waitKey(2) & 0xFF==ord('d'):
+                break
             time.sleep(0.5)#just for testing
             print(blockSize, C, ksize_Blur)
+            if status == False:
+                cap.release()
+                cv2.destroyAllWindows()
+                return 1
         cap.release()
         cv2.destroyAllWindows()
     except: 
-        #traceback.print_exc()
+        cap.release()
+        cv2.destroyAllWindows()
+        traceback.print_exc()
         return
 
-#start(False,"eyJhbGciOiJSUzI1NiIsImtpZCI6ImQwNTU5YzU5MDgzZDc3YWI2NDUxOThiNTIxZmM4ZmVmZmVlZmJkNjIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vd2lzZS1iYXRvbi0zNTM3MTAiLCJhdWQiOiJ3aXNlLWJhdG9uLTM1MzcxMCIsImF1dGhfdGltZSI6MTY3NDEzNDE1MywidXNlcl9pZCI6IkFBcDM1RmdOT0dQNnBkaWg2M0JQRVJ0VGlrdTEiLCJzdWIiOiJBQXAzNUZnTk9HUDZwZGloNjNCUEVSdFRpa3UxIiwiaWF0IjoxNjc0MTM0MTUzLCJleHAiOjE2NzQxMzc3NTMsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsiYWRtaW5AbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.MRkR5XWUlVFi017sakFtHIjHB5g6MKvqRDjdsPNnWunwl9piscOMb2V85bDN5px7NmR7Xn8U2bV5rwFhOn57lS8P9ZVshgtdUvHQbnE39X0vWdsGnpr4w5EEt8Okp15ZrCCB_tGgWov-V7P8K2v1EqO87btqCUs0qrLpBMUFtScGf1BvxLPQdQELsAYeebpUNWHVwpNMrrK8UdGz3pAYGvClquThq14kdUseq53lU4C8fgGRDeMAb-Ihdmvz_jGmacLag4kZ3nRznMrrbvi3R-NVzOIIyB7JQWoFEnhQ0GeWykSsBFsAIJH2SoGq0AMGvbkfTHPJPt9dv7zVDu5l2Q","AAp35FgNOGP6pdih63BPERtTiku1")
+#start(True,"eyJhbGciOiJSUzI1NiIsImtpZCI6ImQwNTU5YzU5MDgzZDc3YWI2NDUxOThiNTIxZmM4ZmVmZmVlZmJkNjIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vd2lzZS1iYXRvbi0zNTM3MTAiLCJhdWQiOiJ3aXNlLWJhdG9uLTM1MzcxMCIsImF1dGhfdGltZSI6MTY3NDQwNDU2NCwidXNlcl9pZCI6IkFBcDM1RmdOT0dQNnBkaWg2M0JQRVJ0VGlrdTEiLCJzdWIiOiJBQXAzNUZnTk9HUDZwZGloNjNCUEVSdFRpa3UxIiwiaWF0IjoxNjc0NDA0NTY0LCJleHAiOjE2NzQ0MDgxNjQsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsiYWRtaW5AbWFpbC5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.GO1SS1hZYmpaCKG89Wqz_Y_vKEyyM9oPUZaxTkGLsAXaggUVG_75WsUNPV-QLyj0wMHrVt9KawkrJk7cJfi0y5nOHEz4dugKqwcTfG4xRECokZUcQnn1txi8VVbf0_tdFXwY1VsX6G9ZFVp-Liv63odaw1f-hTtPxzwRtZ8Bz0DTuJ-IQ2cWUBoObcghYv9KXWatfj2fCP0r6vSee3RrPVyzw80p03jzSrQsevwZ22_o3tER0fy2YpMgCKE_X3GGyp0DN69FauKB6mi0NoXO2M_Kf85bHl9kMTTStC-QFoD8WOiEwvcbsDv1OUoLJcWTORZ_gRAvN6ib7tZMBWE8ZA","AAp35FgNOGP6pdih63BPERtTiku1", video_location="video.webm")

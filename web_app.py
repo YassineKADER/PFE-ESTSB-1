@@ -23,7 +23,6 @@ auth = firebase.auth()
 email, password, user, status = "", "", {}, False
 app.secret_key = os.urandom(28)
 
-
 @app.route('/')
 def index():
     return {'mainview':1}

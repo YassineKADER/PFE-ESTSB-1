@@ -1,7 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
 import { getDatabase, ref, child, onValue, get } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 const para = document.getElementById("check");
-
+console.log("hello")
 //fetch the info of the user
 let user_data;
 await fetch('/user').then(response => response.json()).then(data => user_data = data);

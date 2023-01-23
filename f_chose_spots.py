@@ -47,7 +47,7 @@ def start_chosing(videolocation="video.webm"):
         return img
 
     while True:
-        status = json.loads(requests.get(url="http://127.0.0.1:1212/status").text).get("status")
+        status =json.loads(requests.get(url="http://127.0.0.1:1212/status").text).get("status")
         print(status)
         if status==False:
             cv2.destroyAllWindows()

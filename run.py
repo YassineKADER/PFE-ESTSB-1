@@ -4,7 +4,7 @@ import numpy as np
 import time
 import json
 import traceback
-from datetime import datetime
+from datetime import date, datetime
 import pyrebase
 import requests
 
@@ -39,7 +39,7 @@ def update_data():
 
 
 def start(perview, user_token, user_id, video_location="video.webm"):
-    print("hh1")
+    #print("hh1")
     cap = cv2.VideoCapture(video_location)
     now = datetime.now()
     status = False
@@ -48,24 +48,19 @@ def start(perview, user_token, user_id, video_location="video.webm"):
         for pos in posList:
             x, y = pos
             w, h = width, height
-
             imgCrop = imgThres[y:y + h, x:x + w]
             count = cv2.countNonZero(imgCrop)
-
             if count < 900:
                 color = (0, 200, 0)
                 thic = 5
                 spaces += 1
-
             else:
                 color = (0, 0, 200)
                 thic = 2
-
             cv2.rectangle(img, (x, y), (x + w, y + h), color, thic)
-
             #cv2.putText(img, str(cv2.countNonZero(imgCrop)), (x, y + h - 6), cv2.FONT_HERSHEY_PLAIN, 1,color, 2)
         return [spaces, len(posList)]
-    print("hh2")
+    #print("hh2")
     try:
         if perview :
             cv2.namedWindow("Parameters"+str(now))
@@ -73,10 +68,12 @@ def start(perview, user_token, user_id, video_location="video.webm"):
             cv2.createTrackbar("blockSize", "Parameters"+str(now), data["blockSize"], 50, empty)
             cv2.createTrackbar("C", "Parameters"+str(now), data["C"], 50, empty)
             cv2.createTrackbar("ksize_Blur", "Parameters"+str(now), data["ksize_Blur"], 50, empty)
-            print("hh3")
+            #print("hh3")
         next = []
         perv = next
-        print("hh4")
+        max_data_check = db.child("Users").child(user_id).child("maxSizeAtDay").child(str(date.today())).get().val()
+        if max_data_check is None:
+            max_data_check = 0
         while True:
             status = json.loads(requests.get(url="http://127.0.0.1:1212/status").text).get("status")
             print(status)
@@ -111,11 +108,15 @@ def start(perview, user_token, user_id, video_location="video.webm"):
             imgThres = cv2.dilate(imgThres, kernel, iterations=1)
             perv = next
             next = checkSpaces()
-            if(next != perv):
+            if next != perv:
                 cv2.imwrite("static/pos.png",img=img)
                 db.child("Users").child(user_id).update({"freespace":next[0],"totalplace":next[1]}, token=user_token)
+                new_max_data_check = next[1]-next[0]
+                if new_max_data_check > max_data_check:
+                    db.child("Users").child(user_id).child("maxSizeAtDay").update({str(date.today()):new_max_data_check}, token=user_token)
+                    max_data_check = new_max_data_check
             # Display Output
-            print("hh5")
+            #print("hh5")
             if perview :
                 cv2.imshow("Image"+str(now), img)
                 cv2.imshow("ImageGray"+str(now), imgThres)

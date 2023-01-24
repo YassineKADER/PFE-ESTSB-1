@@ -31,6 +31,7 @@ function getAllData() {
         chart1.update();
         console.log(`static/pos.png${"?t="+new Date().getTime()}`)
         document.getElementById("perview").src=`static/pos.png${"?t="+new Date().getTime()}`;
+        console.log(data.val()[user_data.localId]["maxSizeAtDay"]);
         //console.log(data.val()[user_data.localId]["freespace"], data.val()[user_data.localId]["totalplace"]);
     }));
 }

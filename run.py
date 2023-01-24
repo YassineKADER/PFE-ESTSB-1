@@ -67,13 +67,13 @@ def start(perview, user_token, user_id, video_location="video.webm"):
         return [spaces, len(posList)]
     print("hh2")
     try:
-        """if perview :
+        if perview :
             cv2.namedWindow("Parameters"+str(now))
             cv2.resizeWindow("Parameters"+str(now), 640, 240)
             cv2.createTrackbar("blockSize", "Parameters"+str(now), data["blockSize"], 50, empty)
             cv2.createTrackbar("C", "Parameters"+str(now), data["C"], 50, empty)
             cv2.createTrackbar("ksize_Blur", "Parameters"+str(now), data["ksize_Blur"], 50, empty)
-            print("hh3")"""
+            print("hh3")
         next = []
         perv = next
         print("hh4")
@@ -91,10 +91,10 @@ def start(perview, user_token, user_id, video_location="video.webm"):
             imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
             imgBlur = cv2.GaussianBlur(imgGray, (3, 3), 1)
             # ret, imgThres = cv2.threshold(imgBlur, 150, 255, cv2.THRESH_BINARY)
-            """if perview:
+            if perview:
                 blockSize = cv2.getTrackbarPos("blockSize", "Parameters"+str(now))
                 C = cv2.getTrackbarPos("C", "Parameters"+str(now))
-                ksize_Blur = cv2.getTrackbarPos("ksize_Blur", "Parameters"+str(now))"""
+                ksize_Blur = cv2.getTrackbarPos("ksize_Blur", "Parameters"+str(now))
             if blockSize != data["blockSize"] or C != data["C"] or ksize_Blur !=data["ksize_Blur"]:
                 data["blockSize"] = blockSize
                 data["C"] = C

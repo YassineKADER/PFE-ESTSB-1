@@ -123,4 +123,4 @@ def get_status():
     return {"status":status}
 
 if __name__ == "__main__":
-    app.run(debug=False, port=1212)
+    app.run(debug=True, port=1212)

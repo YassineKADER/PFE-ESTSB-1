@@ -31,8 +31,16 @@ function getAllData() {
         chart1.update();
         console.log(`static/pos.png${"?t="+new Date().getTime()}`)
         document.getElementById("perview").src=`static/pos.png${"?t="+new Date().getTime()}`;
-        console.log(data.val()[user_data.localId]["maxSizeAtDay"]);
+        const data_chart_2 = data.val()[user_data.localId]["maxSizeAtDay"];
+        console.log(Object.keys(data_chart_2))
+        console.log(Object.values(data_chart_2))
+        //chart_2.data.datasets[0].data = Object.values(data_chart_2);
+        //chart_2.data.datasets[0].labels = Object.keys(data_chart_2);
+        //chart_2.update();
         //console.log(data.val()[user_data.localId]["freespace"], data.val()[user_data.localId]["totalplace"]);
+        chart_2.data.datasets[0].labels = [860,1140,1060,1060,1070,1110,1330,2210,7830,2478,860,1140,1060,1060,1070,1110,1330,2210,7830,2478];
+        chart_2.update();
+        console.log(chart_2);
     }));
 }
 getAllData();
@@ -73,7 +81,32 @@ var chart1 = new Chart(chart, {
     options: options
 });
 //-----------------------------------------
+//chart 2
+const chart2 = document.getElementById("chart2")
+const chart_2 = new Chart(chart2, {
+    type: "line",
+    data: {
+      labels: [100,200,300,400,500,600,700,800,900,1000],
+      datasets: [{
+        data: [860,1140,1060,1060,1070,1110,1330,2210,7830,2478],
+        borderColor: "red",
+        fill: true
+      },{
+        data: [1600,1700,1700,1900,2000,2700,4000,5000,6000,7000],
+        borderColor: "green",
+        fill: false
+      },{
+        data: [300,700,2000,5000,6000,4000,2000,1000,200,100],
+        borderColor: "blue",
+        fill: false
+      }]
+    },
+    options: {
+      legend: {display: false}
+    }
+  });
 
+//--------------------------------------------
 //start, stop,...------------------------------------
 document.getElementById("start").addEventListener("click", (event) => {
     let url = document.getElementById("ipcameraurl").value;

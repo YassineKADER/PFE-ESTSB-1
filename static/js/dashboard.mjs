@@ -39,9 +39,7 @@ function getAllData() {
         //chart_2.update();
         //console.log(data.val()[user_data.localId]["freespace"], data.val()[user_data.localId]["totalplace"]);
         chart_2.data.datasets[0].data = Object.values(data_chart_2);
-        const totalspaces = data.val()[user_data.localId]["totalplace"];
-        chart_2.data.datasets[1].data = Object.values(data_chart_2).map((elm_value) => {totalspaces - elm_value;});
-        console.log(Object.values(data_chart_2).map((elm_value) => {totalspaces - elm_value;}))
+        let totalspaces = data.val()[user_data.localId]["totalplace"];
         chart_2.data.labels = Object.keys(data_chart_2);
         chart_2.options.scales.y.suggestedMax = data.val()[user_data.localId]["totalplace"];
         chart_2.update();
@@ -94,14 +92,10 @@ const chart_2 = new Chart(chart2, {
       labels: [],
       datasets: [{
         data: [],
-        borderColor: "yellow",
+        label: 'Max Reserved Places',
+        borderColor: "red",
         fill: true
-      },
-    {
-        data : [],
-        borderColor : "green",
-        fill : true
-    }]
+      }]
     },
     options: {
       scales : {

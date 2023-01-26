@@ -25,7 +25,11 @@ app.secret_key = os.urandom(28)
 
 @app.route('/')
 def index():
-    return {'mainview':1}
+    try:
+        if session['user']:
+            return redirect("/login")
+    except:
+        return redirect("/dashboard")
 
 
 @app.route('/logout', methods=['POST','GET'])

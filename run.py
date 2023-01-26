@@ -123,7 +123,7 @@ def start(perview, user_token, user_id, video_location="video.webm"):
                 cv2.imshow("ImageBlur"+str(now), imgBlur)
             if cv2.waitKey(2) & 0xFF==ord('d'):
                 break
-            time.sleep(0.5)#just for testing
+            #time.sleep(0.5)#just for testing
             print(blockSize, C, ksize_Blur)
             if status == False:
                 cap.release()

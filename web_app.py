@@ -124,7 +124,7 @@ def get_status():
         global status
         data = request.get_json()
         status = data.get("status")
-    return {"status":status}
+    return {"status" : status}
 
 if __name__ == "__main__":
     app.run(debug=True, port=1212)

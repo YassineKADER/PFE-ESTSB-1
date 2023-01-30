@@ -21,6 +21,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    align-content: center;
+    margin-top: 8%;
 }
 
 .login {
@@ -77,6 +79,10 @@ body {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+#nav2{
+    background-color: #0d1117;
 }
 
 .passForg form {

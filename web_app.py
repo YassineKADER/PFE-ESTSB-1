@@ -2,7 +2,7 @@ from flask import Flask, request, render_template, session, redirect, url_for
 from run import *
 from f_chose_spots import *
 import pyrebase
-import os
+import os, signal
 import sys
 from threading import Thread
 
@@ -125,6 +125,11 @@ def get_status():
         data = request.get_json()
         status = data.get("status")
     return {"status":status}
+
+@app.route('/quit')
+def quit_app():
+    os.kill(os.getpid(), signal.SIGINT)
+    return { "success": True, "message": "Server is shutting down..." }
 
 if __name__ == "__main__":
     app.run(debug=True, port=1212)

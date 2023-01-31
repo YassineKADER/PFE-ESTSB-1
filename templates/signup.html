@@ -22,18 +22,8 @@
     <title>Login</title>
   </head>
   <body>
-    <nav class="navbar navbar-dark" id="nav2">
-        <form class="form-inline" action="/quit">
-          <input
-            class="btn btn-outline-secondary my-2 my-sm-0"
-            type="submit"
-            value="Close The App"
-          />
-        </form>
-      </nav>
     <div class="flexed-body">
       <div class="login">
-        <h1 class="text-center">Hello Again!</h1>
         <form action="" class="needs-validation" id="form">
           <div class="form-group">
             <label class="form-label" for="email">Email Adress</label>
@@ -43,6 +33,7 @@
               id="email"
               name="email"
               placeholder="example@u.com"
+              required
             />
             <div class="invalid-feedback">Please enter your email Adress</div>
           </div>
@@ -54,21 +45,31 @@
               id="password"
               name="password"
               placeholder="i'm i a password?"
+              required
             />
+            <div style="margin-top: 15px;">
+              <label class="form-label" for="email">Renter Your Password</label>
+              <input
+                class="form-control"
+                type="password"
+                id="password-confirm"
+                name="password"
+                placeholder="i'm i a password?"
+                required
+              />
+              <p id="index" style="font-size:1rem;"></p>
+            </div>
           </div>
           <div class="form-group">
             <a href="/forgotpassword" class="form-check-label"
               >Forgot password?</a
             >
-            <br>
-            <a href="/signup" class="form-check-label"
-              >Don't have an account?</a
-            >
+            <br />
           </div>
           <input class="btn btn-success w-100" type="submit" value="SIGN IN" />
         </form>
       </div>
-    </>
+    </div>
   </body>
   <script
     src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -85,5 +86,9 @@
     integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"
   ></script>
-  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  <script
+    src="{{ url_for('static', filename='js/signup.js') }}"
+    async
+    defer
+  ></script>
 </html>

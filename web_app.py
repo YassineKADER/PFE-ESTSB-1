@@ -126,10 +126,38 @@ def get_status():
         status = data.get("status")
     return {"status":status}
 
+@app.route('/signup', methods=["POST", "GET"])
+def sign_up():
+    if request.method == "POST":
+        sign_up_data = request.get_json()
+        email = sign_up_data.get("email")
+        password = sign_up_data.get("password")
+        try:
+            global user
+            auth.create_user_with_email_and_password(email, password)
+            user = auth.sign_in_with_email_and_password(email, password)
+            session['user'] = user
+        except:
+            return {"message":"Mail Adress Already Exist"}
+        return {"message":"Acount Created"}
+    return render_template("signup.html")
+
+@app.route("/signupform", methods=["POST", "GET"])
+def forminfo():
+    try:
+        if session['user']:
+            render_template("signupform.html")
+        else:
+            return redirect("/")
+    except:
+        return redirect("/")
+    return redirect("/")
+
 @app.route('/quit')
 def quit_app():
     os.kill(os.getpid(), signal.SIGINT)
     return { "success": True, "message": "Server is shutting down..." }
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=1212)

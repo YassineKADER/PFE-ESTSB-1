@@ -24,52 +24,120 @@
   </head>
   <body>
     <div class="container">
-        <form class="my-3">
-            <div style="border: solid white 1px; padding: 2rem;border-radius:12px;">
-            <h3 class="text-white">Generale Informations</h3>
-            <div class="form-row">
-                <div class="col-6">
-                    <label class="form-label text-white">Name Of The Parking</label>
-                  <input type="text" class="form-control bg-dark" placeholder="Parking of heaven...." aria-label="First name">
-                </div>
-                <div class="col-6">
-                    <label class="form-label text-white">One ligne description</label>
-                  <input type="text" class="form-control bg-dark" placeholder="Our parking is the best...." aria-label="Last name">
-                </div>
-                <div class="col-4">
-                    <label class="form-label text-white">Owner Name</label>
-                  <input type="text" class="form-control bg-dark" placeholder="Ahmed Mohamed" aria-label="Last name">
-                </div>
-                <div class="col-4">
-                    <label class="form-label text-white">Admin Name</label>
-                  <input type="text" class="form-control bg-dark" placeholder="Ahmed Mohamed" aria-label="Last name">
-                </div>
-                <div class="col-4">
-                    <label class="form-label text-white">Max Places Number</label>
-                  <input type="text" class="form-control bg-dark" placeholder="Ahmed Mohamed" aria-label="Last name">
-                </div>
-              </div>
+      <form class="my-3" action="/signupform" method="POST">
+        <div
+          style="border: solid white 1px; padding: 2rem; border-radius: 12px"
+        >
+          <h3 class="text-white">Generale Informations</h3>
+          <div class="form-row">
+            <div class="col-6">
+              <label class="form-label text-white" >Name Of The Parking</label>
+              <input
+                type="text"
+                name="name"
+                class="form-control bg-dark"
+                placeholder="Parking of heaven...."
+                aria-label="First name"
+              />
             </div>
-            <div style="border: solid white 1px; padding: 2rem;border-radius:12px;margin-top:1rem;">
-            <h3 class="text-white">Location</h3>
-            <div class="form-row">
-                <div class="col-6">
-                    <label class="form-label text-white">Latitude</label>
-                  <input type="text" class="form-control bg-dark" placeholder="9.872098282" aria-label="First name">
-                </div>
-                <div class="col-6">
-                    <label class="form-label text-white">Longitude</label>
-                  <input type="text" class="form-control bg-dark" placeholder="-7.09982762" aria-label="Last name">
-                </div>
-                <div class="col-6" id="geo">
-                    <button class="btn btn-outline-light my-1">Get Geo Location</button>
-                </div>
-                <div class="col-6 my-2" id="map">
-                    <iframe class="w-100" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d220388.772015902!2d-9.519098672202574!3d30.3346168430427!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sma!4v1675256425454!5m2!1sen!2sma" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
+            <div class="col-6">
+              <label class="form-label text-white">One ligne description</label>
+              <input
+                name="description"
+                type="text"
+                class="form-control bg-dark"
+                placeholder="Our parking is the best...."
+                aria-label="Last name"
+              />
             </div>
+            <div class="col-4">
+              <label class="form-label text-white">Owner Name</label>
+              <input
+                name="ownername"
+                type="text"
+                class="form-control bg-dark"
+                placeholder="Ahmed Mohamed"
+                aria-label="Last name"
+              />
+            </div>
+            <div class="col-4">
+              <label class="form-label text-white">Admin Name</label>
+              <input
+                name="adminname"
+                type="text"
+                class="form-control bg-dark"
+                placeholder="Ahmed Mohamed"
+                aria-label="Last name"
+              />
+            </div>
+            <div class="col-4">
+              <label class="form-label text-white">Max Places Number</label>
+              <input
+                name="totalplace"
+                type="text"
+                class="form-control bg-dark"
+                placeholder="Ahmed Mohamed"
+                aria-label="Last name"
+              />
+            </div>
+          </div>
         </div>
-        </form>
+        <div
+          style="
+            border: solid white 1px;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+          "
+        >
+          <h3 class="text-white">Location</h3>
+          <div class="form-row">
+            <div class="col-6">
+              <label class="form-label text-white">Latitude</label>
+              <input
+                name="latitude"
+                type="text"
+                class="form-control bg-dark"
+                id="latitude"
+                placeholder="9.872098282"
+                aria-label="Latitude"
+              />
+            </div>
+            <div class="col-6">
+              <label class="form-label text-white">Longitude</label>
+              <input
+                name="longitude"
+                type="text"
+                class="form-control bg-dark"
+                id="longitude"
+                placeholder="-7.09982762"
+                aria-label="Longitude"
+              />
+            </div>
+            <div class="col-6" id="geo">
+              <button class="btn btn-outline-light my-1">
+                Get Geo Location
+              </button>
+              <label class="form-label text-white"
+                >Please Enter Your Exact Cords GEOLOCATIONS Not Precise</label
+              >
+            </div>
+            <div class="col-6 my-2" id="map">
+              <iframe
+                class="w-100"
+                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d220388.772015902!2d-9.519098672202574!3d30.3346168430427!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sma!4v1675256425454!5m2!1sen!2sma"
+                width="400"
+                height="300"
+                style="border: 0"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </div>
+        </div>
+        <input class="btn btn-outline-success my-2" type="submit" value="Save">
+      </form>
     </div>
   </body>
   <script

@@ -4,6 +4,7 @@ from run import *
 from f_chose_spots import *
 import pyrebase
 import os, signal
+import traceback
 import sys
 from threading import Thread
 
@@ -139,13 +140,27 @@ def sign_up():
             auth.create_user_with_email_and_password(email, password)
             user = auth.sign_in_with_email_and_password(email, password)
             session['user'] = user
-        except:
+            user_info ={"name": "","location": {"latitude": 0,"longitude": 0},"freespace": 0,"totalplace": 0,"maxSizeAtDay": {0:0},"status": False,"description": "","ownername": "","adminname": ""}
+            db.child("Users").child(user["localId"]).set(user_info, token=user["idToken"])
+        except Exception:
+            traceback.print_exc()
             return {"message":"Mail Adress Already Exist"}
         return {"message":"Acount Created"}
     return render_template("signup.html")
 
 @app.route("/signupform", methods=["POST", "GET"])
 def forminfo():
+    if request.method == "POST":
+        name = request.form["name"]
+        desc = request.form["description"]
+        ownername = request.form["ownername"]
+        adminname = request.form["adminname"]
+        totalplaces = request.form["totalplace"]
+        latitude = request.form["latitude"]
+        longitude = request.form["longitude"]
+        return {
+            {"name": name,"location": {"latitude": latitude,"longitude": longitude},"freespace": 0,"totalplace": totalplaces,"maxSizeAtDay": {0:0},"status": False,"description": desc,"ownername": ownername,"adminname": adminname}
+        }
     try:
         if session['user']:
             return render_template("signupform.html")

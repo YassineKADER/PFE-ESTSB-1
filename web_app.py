@@ -158,9 +158,9 @@ def forminfo():
         totalplaces = request.form["totalplace"]
         latitude = request.form["latitude"]
         longitude = request.form["longitude"]
-        return {
-            {"name": name,"location": {"latitude": latitude,"longitude": longitude},"freespace": 0,"totalplace": totalplaces,"maxSizeAtDay": {0:0},"status": False,"description": desc,"ownername": ownername,"adminname": adminname}
-        }
+        db.child("Users").child(user["localId"]).update({"name": name,"location": {"latitude": latitude,"longitude": longitude},"status": False,"description": desc,"ownername": ownername,"adminname": adminname}, token=user["idToken"])
+        return redirect("/dashboard")
+        
     try:
         if session['user']:
             return render_template("signupform.html")

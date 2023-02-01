@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, session, redirect, url_for
+from flaskwebgui import FlaskUI
 from run import *
 from f_chose_spots import *
 import pyrebase
@@ -7,6 +8,7 @@ import sys
 from threading import Thread
 
 app = Flask(__name__)
+ui = FlaskUI(app)
 
 config = {
     "apiKey": "AIzaSyBgGx67w032_zncuZ37tFYPrm02rH1XbrY",
@@ -146,12 +148,11 @@ def sign_up():
 def forminfo():
     try:
         if session['user']:
-            render_template("signupform.html")
+            return render_template("signupform.html")
         else:
             return redirect("/")
     except:
         return redirect("/")
-    return redirect("/")
 
 @app.route('/quit')
 def quit_app():
@@ -161,3 +162,4 @@ def quit_app():
 
 if __name__ == "__main__":
     app.run(debug=True, port=1212)
+    #ui.run()

@@ -140,7 +140,7 @@ def sign_up():
             auth.create_user_with_email_and_password(email, password)
             user = auth.sign_in_with_email_and_password(email, password)
             session['user'] = user
-            user_info ={"name": "","location": {"latitude": 0,"longitude": 0},"freespace": 0,"totalplace": 0,"maxSizeAtDay": {0:0},"status": False,"description": "","ownername": "","adminname": ""}
+            user_info ={"name": "","location": {"latitude": 0,"longitude": 0, "city":""},"freespace": 0,"totalplace": 0,"maxSizeAtDay": {0:0},"status": False,"description": "","ownername": "","adminname": ""}
             db.child("Users").child(user["localId"]).set(user_info, token=user["idToken"])
         except Exception:
             traceback.print_exc()
@@ -158,7 +158,8 @@ def forminfo():
         totalplaces = request.form["totalplace"]
         latitude = request.form["latitude"]
         longitude = request.form["longitude"]
-        db.child("Users").child(user["localId"]).update({"name": name,"location": {"latitude": latitude,"longitude": longitude},"status": False,"description": desc,"ownername": ownername,"adminname": adminname}, token=user["idToken"])
+        city = request.form["city"]
+        db.child("Users").child(user["localId"]).update({"name": name,"location": {"latitude": latitude,"longitude": longitude, "city":city},"status": True,"description": desc,"ownername": ownername,"adminname": adminname}, token=user["idToken"])
         return redirect("/dashboard")
         
     try:

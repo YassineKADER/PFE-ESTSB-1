@@ -14,7 +14,7 @@
 
 body {
     height: 100vh;
-    background-color: #0d1117;
+    background-color: white;
 }
 
 .flexed-body {
@@ -22,16 +22,19 @@ body {
     align-items: center;
     justify-content: center;
     align-content: center;
+}
+div#login.flexed-body{
     margin-top: 8%;
 }
 
 .login {
     width: 360px;
-    color: white;
+    color: var(--dark);
     height: 55%;
     padding: 20px;
     border-radius: 12px;
-    background-color: #161b22;
+    background-color: whitesmoke;
+    border: blue solid 1px;
 }
 
 .login h1 {
@@ -70,19 +73,21 @@ body {
 .passForg {
     text-align: center;
     width: 70vh;
-    color: white;
+    color: var(--dark);
     height: 35%;
     padding: 20px;
     border-radius: 12px;
-    background-color: #161b22;
+    background-color: whitesmoke;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    border: blue 1px solid;
 }
 
 #nav2{
-    background-color: #0d1117;
+    background-color: whitesmoke;
+    justify-content: flex-end;
 }
 
 .passForg form {
@@ -90,7 +95,7 @@ body {
 }
 
 .passForg form input[type="email"] {
-    background-color: #0d1117;
+    background-color: whitesmoke;
     border: gray solid 0.5px;
     margin-bottom: 10px;
 }

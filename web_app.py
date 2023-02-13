@@ -22,7 +22,7 @@ config = {
 firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
 email, password, user, status = "", "", {}, False
-#app.secret_key = os.urandom(28)
+app.secret_key = os.urandom(28)
 
 @app.route('/')
 def index():

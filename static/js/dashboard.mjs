@@ -68,7 +68,7 @@ var data1 = {
             data: [0, 10],
             backgroundColor: [
                 "#03C988",
-                "#1C82AD"
+                "#1C82AF"
             ],
             borderColor: [
                 "#00de95",

@@ -57,12 +57,12 @@ div#login.flexed-body{
 }
 
 .login form input[type="email"] {
-    background-color: #0d1117;
+    background-color: whitesmoke;
     border: gray solid 0.5px;
 }
 
 .login form input[type="password"] {
-    background-color: #0d1117;
+    background-color: whitesmoke;
     border: gray solid 0.5px;
 }
 
@@ -101,18 +101,22 @@ div#login.flexed-body{
 }
 
 #nav {
-    background-color: #161b22;
+    background-color: blue;
+}
+
+.text-dark{
+    color: var(--dark);
 }
 
 .item {
-    background-color: #161b22;
-    color: white;
+    background-color: white;
+    color: var(--dark);
     cursor: pointer;
 }
 
 .item:hover{
-    color: #161b22;
-    background-color: white;
+    color: white;
+    background-color: var(--dark);
 }
 
 .item-container {
@@ -124,17 +128,19 @@ div#login.flexed-body{
 }
 
 #toggle-start button.operation-btn{
-    background-color: #0d1117;
-    color: white;
+    background-color: blue;
+    color: var(--dark);
     padding: 0.75rem;
-    border: solid 1px white;
+    color: white;
+    border: blue solid 0px;
+    /*border: solid 1px blue;*/
     margin: 1.5rem;
     border-radius: 5px;
 }
 
 #toggle-start button.operation-btn:hover{
-    background-color: white;
-    color: #0d1117;
+    background-color: var(--dark);
+    color: white;
 }
 
 .dark-bg{

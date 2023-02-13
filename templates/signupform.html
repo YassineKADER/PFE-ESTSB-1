@@ -23,59 +23,74 @@
     />
   </head>
   <body>
+    <nav class="navbar navbar-light" id="nav">
+      <a class="navbar-brand" style="color:white; font-weight:700;">
+        <img src="{{url_for('static', filename='images/logo_final.png')}}" width="30" class="d-inline-block align-top"
+          alt="" />
+        Informations
+      </a>
+      <div class="d-flex" style="gap:5px">
+        <form class="" action="/dashboard">
+          <input class="btn btn-outline-light my-2 my-sm-0" type="submit" value="Back" style="border:none;font-weight:600;"/>
+        </form>
+      <form class=" " action="/logout">
+        <input class="btn btn-outline-light my-2 my-sm-0" type="submit" value="Sign out" style="border:none;font-weight:600;"/>
+      </form>
+    </div>
+    </nav>
     <div class="container">
       <form class="my-3" action="/signupform" method="POST">
         <div
-          style="border: solid white 1px; padding: 2rem; border-radius: 12px"
+          style="border: solid var(--dark) 1px; padding: 2rem; border-radius: 12px"
         >
-          <h3 class="text-white">Generale Informations</h3>
+          <h3 class="text-dark">Generale Informations</h3>
           <div class="form-row">
             <div class="col-6">
-              <label class="form-label text-white" >Name Of The Parking</label>
+              <label class="form-label text-dark" >Name Of The Parking</label>
               <input
                 type="text"
                 name="name"
-                class="form-control bg-dark"
+                class="form-control"
                 placeholder="Parking of heaven...."
                 aria-label="First name"
               />
             </div>
             <div class="col-6">
-              <label class="form-label text-white">One ligne description</label>
+              <label class="form-label text-dark">One ligne description</label>
               <input
                 name="description"
                 type="text"
-                class="form-control bg-dark"
+                class="form-control"
                 placeholder="Our parking is the best...."
                 aria-label="Last name"
               />
             </div>
             <div class="col-4">
-              <label class="form-label text-white">Owner Name</label>
+              <label class="form-label text-dark">Owner Name</label>
               <input
                 name="ownername"
                 type="text"
-                class="form-control bg-dark"
+                class="form-control"
                 placeholder="Ahmed Mohamed"
                 aria-label="Last name"
               />
             </div>
             <div class="col-4">
-              <label class="form-label text-white">Admin Name</label>
+              <label class="form-label text-dark">Admin Name</label>
               <input
                 name="adminname"
                 type="text"
-                class="form-control bg-dark"
+                class="form-control"
                 placeholder="Ahmed Mohamed"
                 aria-label="Last name"
               />
             </div>
             <div class="col-4">
-              <label class="form-label text-white">Max Places Number</label>
+              <label class="form-label text-dark">Max Places Number</label>
               <input
                 name="totalplace"
                 type="text"
-                class="form-control bg-dark"
+                class="form-control"
                 placeholder="Ahmed Mohamed"
                 aria-label="Last name"
               />
@@ -84,42 +99,42 @@
         </div>
         <div
           style="
-            border: solid white 1px;
+            border: solid var(--dark) 1px;
             padding: 2rem;
             border-radius: 12px;
             margin-top: 1rem;
           "
         >
-          <h3 class="text-white">Location</h3>
+          <h3 class="text-dark">Location</h3>
           <div class="form-row">
             <div class="col-4">
-              <label class="form-label text-white">Latitude</label>
+              <label class="form-label text-dark">Latitude</label>
               <input
                 name="latitude"
                 type="text"
-                class="form-control bg-dark"
+                class="form-control"
                 id="latitude"
                 placeholder="9.872098282"
                 aria-label="Latitude"
               />
             </div>
             <div class="col-4">
-              <label class="form-label text-white">Longitude</label>
+              <label class="form-label text-dark">Longitude</label>
               <input
                 name="longitude"
                 type="text"
-                class="form-control bg-dark"
+                class="form-control"
                 id="longitude"
                 placeholder="-7.09982762"
                 aria-label="Longitude"
               />
             </div>
             <div class="col-4">
-              <label class="form-label text-white">City</label>
+              <label class="form-label text-dark">City</label>
               <input
                 name="city"
                 type="text"
-                class="form-control bg-dark"
+                class="form-control"
                 id="longitude"
                 placeholder="Agadir,...."
                 aria-label="City"
@@ -127,10 +142,10 @@
               />
             </div>
             <div class="col-6" id="geo">
-              <button class="btn btn-outline-light my-1">
+              <button class="btn btn-outline-dark my-1">
                 Get Geo Location
               </button>
-              <label class="form-label text-white"
+              <label class="form-label text-dark"
                 >Please Enter Your Exact Cords GEOLOCATIONS Not Precise</label
               >
             </div>

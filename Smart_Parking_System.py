@@ -175,5 +175,5 @@ def quit_app():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=1212)
+    app.run(debug=False, port=1212)
     

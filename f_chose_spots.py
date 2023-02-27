@@ -65,8 +65,8 @@ def start_chosing(videolocation="video.webm"):
         for pos in posList:
             cv2.rectangle(img, pos, (pos[0] + width, pos[1] + height), (255, 0, 255), 2)
 
-        cv2.imshow("Image", img)
-        cv2.setMouseCallback("Image", mouseClick)
+        cv2.imshow("Chose Spots", img)
+        cv2.setMouseCallback("Chose Spots", mouseClick)
         cv2.waitKey(1)
 
 #start_chosing()

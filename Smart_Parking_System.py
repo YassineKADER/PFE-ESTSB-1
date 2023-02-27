@@ -157,6 +157,7 @@ def forminfo():
         latitude = request.form["latitude"]
         longitude = request.form["longitude"]
         city = request.form["city"]
+        print(user)
         db.child("Users").child(user["localId"]).update({"name": name,"location": {"latitude": latitude,"longitude": longitude, "city":city},"status": True,"description": desc,"ownername": ownername,"adminname": adminname}, token=user["idToken"])
         return redirect("/dashboard")
         

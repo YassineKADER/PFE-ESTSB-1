@@ -1,13 +1,9 @@
 import pyrebase
 
+
+#your firebase web app config
 config = {
-    "apiKey": "",
-    "authDomain": "wise-baton-353710.firebaseapp.com",
-    "databaseURL": "",
-    "projectId": "wise-baton-353710",
-    "storageBucket": "wise-baton-353710.appspot.com",
-    "messagingSenderId": "962857669223",
-    "appId": "1:962857669223:web:3360987f13c2f1e6787ac2"
+    
 }
 
 
